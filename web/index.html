@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#009b77">
+  <meta name="description" content="Локальная панель управления evidence-first агентом для Halyk AI Challenge">
+  <title>Halyk AI Command Center</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="mobile-header">
+    <a class="brand-link" href="#overview" aria-label="AI Challenge — главная">
+      <span class="brand-mark"><img src="/assets/halyk-mark.svg" alt="" width="43" height="58"></span>
+      <span class="brand-name"><span class="brand-ai">AI</span><span class="brand-challenge">Challenge</span></span>
+    </a>
+    <button class="mobile-menu-button" id="mobile-menu" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация" hidden>
+      <a class="nav-link active" data-section="overview" href="#overview">Обзор</a>
+      <a class="nav-link" data-section="architecture" href="#architecture">Почему сильнее</a>
+      <a class="nav-link" data-section="workspace" href="#workspace">Запуск агента</a>
+      <a class="nav-link" data-section="results" href="#results">Решения</a>
+      <a class="nav-link" data-section="documents" href="#documents">Документы</a>
+    </nav>
+  </header>
+
+  <aside class="sidebar" aria-label="Основная навигация">
+    <div class="sidebar-brand">
+      <a class="brand-link" href="#overview" aria-label="AI Challenge — главная">
+        <span class="brand-mark"><img src="/assets/halyk-mark.svg" alt="" width="43" height="58"></span>
+        <span class="brand-name"><span class="brand-ai">AI</span><span class="brand-challenge">Challenge</span></span>
+      </a>
+      <span>COMMAND CENTER</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-caption">РАБОЧАЯ ЗОНА</span>
+      <a class="nav-link active" data-section="overview" href="#overview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z"/></svg>
+        <span>Обзор</span>
+      </a>
+      <a class="nav-link" data-section="architecture" href="#architecture">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 6v6c0 5.2 3.8 9.8 9 11 5.2-1.2 9-5.8 9-11V6l-9-4Zm0 2.2L19 7v5c0 4.1-2.8 7.7-7 8.8C7.8 19.7 5 16.1 5 12V7l7-2.8Zm-1 4.3h2v5h-2v-5Zm0 6.5h2v2h-2v-2Z"/></svg>
+        <span>Почему сильнее</span>
+      </a>
+      <a class="nav-link" data-section="workspace" href="#workspace">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg>
+        <span>Запуск агента</span>
+      </a>
+      <a class="nav-link" data-section="results" href="#results">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5V3Zm2 2v14h10V5H7Zm2 3h6v2H9V8Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z"/></svg>
+        <span>Решения</span>
+      </a>
+      <a class="nav-link" data-section="documents" href="#documents">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h11l5 5v13H4V3Zm2 2v14h12V9h-4V5H6Zm10 1.4V7h.6L16 6.4Z"/></svg>
+        <span>Документы</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="local-state"><i></i><span>Локальный сервер</span><strong>Online</strong></div>
+      <a class="sidebar-download" href="/api/download/submission" download>
+        <span>submission.json</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10l3.5-3.5 1.4 1.4L12 16.8l-5.9-5.9 1.4-1.4L11 13V3Zm-6 16h14v2H5v-2Z"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <main class="app-main" id="main">
+    <div class="topbar">
+      <div>
+        <span class="eyebrow">HALYK AI CHALLENGE</span>
+        <strong>Evidence-first covenant agent</strong>
+      </div>
+      <div class="topbar-actions">
+        <button class="button secondary compact" id="validate-top" type="button">Проверить JSON</button>
+        <a class="button primary compact" href="/api/download/submission" download>
+          Скачать submission
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3h2v10l3.5-3.5 1.4 1.4L12 16.8l-5.9-5.9 1.4-1.4L11 13V3Zm-6 16h14v2H5v-2Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <section class="dashboard-section overview-section" id="overview" aria-labelledby="overview-title">
+      <div class="page-heading">
+        <div>
+          <span class="section-kicker">ОБЗОР СИСТЕМЫ</span>
+          <h1 id="overview-title">Halyk AI Command Center</h1>
+          <p>Управляйте агентом, проверяйте доказательства и готовьте submission в одном рабочем пространстве.</p>
+        </div>
+        <span class="environment-badge"><i></i> localhost:8765</span>
+      </div>
+
+      <div class="overview-grid">
+        <article class="command-status-card">
+          <div class="status-card-head">
+            <span>ПОСЛЕДНИЙ ПРОГОН</span>
+            <span class="run-label" id="last-run">NO RUN</span>
+          </div>
+          <div class="score-line">
+            <strong id="hero-score">—</strong>
+            <div><span>PUBLIC SCORE</span><small>калибровка открытого набора</small></div>
+          </div>
+          <div class="status-card-foot">
+            <i></i>
+            <span id="hero-mode">Агент готов к работе</span>
+          </div>
+        </article>
+
+        <div class="metric-grid" aria-label="Метрики проекта">
+          <article class="metric-card">
+            <span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h11l5 5v13H4V3Zm2 2v14h12V9h-4V5H6Z"/></svg></span>
+            <strong id="metric-docs">—</strong>
+            <span>PDF-документов</span>
+            <small>индекс агента</small>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3V5Zm2 2v2h14V7H5Zm0 4v6h14v-6H5Z"/></svg></span>
+            <strong id="metric-txns">—</strong>
+            <span>Транзакций</span>
+            <small>в реестре</small>
+          </article>
+          <article class="metric-card">
+            <span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 16.2-3.5-3.5L4.1 14.1 9 19 20 8l-1.4-1.4L9 16.2Z"/></svg></span>
+            <strong id="metric-cells">—</strong>
+            <span>Ковенантов</span>
+            <small>проверено</small>
+          </article>
+          <article class="metric-card score-card">
+            <span class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5.1 3.4 9.8 8 11 4.6-1.2 8-5.9 8-11V5l-8-3Zm0 2.1L18 6.3V11c0 4-2.5 7.8-6 8.9C8.5 18.8 6 15 6 11V6.3l6-2.2Zm-1.1 10.6 4.9-4.9-1.4-1.4-3.5 3.5-1.7-1.7-1.4 1.4 3.1 3.1Z"/></svg></span>
+            <strong id="metric-score">—</strong>
+            <span>Public score</span>
+            <small>локальная проверка</small>
+          </article>
+        </div>
+      </div>
+
+      <article class="readiness-card reveal-on-scroll" aria-labelledby="readiness-title">
+        <div class="readiness-summary">
+          <div class="readiness-heading">
+            <span class="section-kicker">SUBMISSION READINESS</span>
+            <h2 id="readiness-title">Контроль перед сдачей</h2>
+            <p>Независимые проверки схемы, источников, вычислений и контрфактических доказательств.</p>
+          </div>
+          <div class="readiness-score" aria-label="Операционный индекс готовности">
+            <div><strong id="readiness-score">—</strong><span>/100</span></div>
+            <span class="readiness-state" id="readiness-state">Нет отчёта</span>
+            <div class="readiness-track" aria-hidden="true"><i id="readiness-progress"></i></div>
+            <small>QA-индикатор, не официальный балл</small>
+          </div>
+        </div>
+
+        <div class="readiness-body">
+          <div class="gate-list" id="readiness-gates" aria-live="polite">
+            <div class="gate-row pending"><span></span><div><strong>Ожидается запуск</strong><small>После анализа здесь появятся hard gates.</small></div><b>WAIT</b></div>
+          </div>
+          <dl class="readiness-meta">
+            <div><dt>Submission SHA-256</dt><dd id="readiness-hash">—</dd></div>
+            <div><dt>Пограничные решения</dt><dd id="readiness-risk">—</dd></div>
+            <div><dt>Маршрут</dt><dd id="readiness-route">—</dd></div>
+            <div class="readiness-actions">
+              <dt>Audit package</dt>
+              <dd>
+                <a href="/api/download/quality" download>QA report</a>
+                <a href="/api/download/plans" download>Semantic plans</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    </section>
+
+    <section class="dashboard-section architecture-section" id="architecture" aria-labelledby="architecture-title">
+      <div class="section-heading horizontal">
+        <div>
+          <span class="section-kicker">EVIDENCE-FIRST ARCHITECTURE</span>
+          <h2 id="architecture-title">Не угадывает ответ — доказывает его</h2>
+          <p>LLM понимает документы, а деньги, пороги и причинность проверяет детерминированный контур.</p>
+        </div>
+        <span class="architecture-badge">AUDITABLE BY DESIGN</span>
+      </div>
+
+      <div class="pipeline-grid" aria-label="Пять этапов работы агента">
+        <article class="pipeline-step"><span>01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h11l5 5v13H4V3Zm2 2v14h12V9h-4V5H6Zm2 7h8v2H8v-2Zm0 4h6v2H8v-2Z"/></svg><h3>Инвентаризация</h3><p>SHA-256, страницы, счета и сценарии. Ничего не теряется молча.</p></article>
+        <article class="pipeline-step"><span>02</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 4 5v6c0 5.1 3.4 9.8 8 11 4.6-1.2 8-5.9 8-11V5l-8-3Zm0 2.1L18 6.3V11c0 4-2.5 7.8-6 8.9C8.5 18.8 6 15 6 11V6.3l6-2.2Z"/></svg><h3>Authority resolver</h3><p>Отбрасывает draft, rejected и 2024; сравнивает финальные версии 2025.</p></article>
+        <article class="pipeline-step"><span>03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5V3Zm2 2v14h10V5H7Zm2 3h6v2H9V8Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z"/></svg><h3>Строгий план</h3><p>Модель возвращает JSON Schema: формула, источники, факты и кандидаты evidence.</p></article>
+        <article class="pipeline-step"><span>04</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4V4Zm2 2v3h12V6H6Zm0 5v7h3v-7H6Zm5 0v7h3v-7h-3Zm5 0v7h2v-7h-2Z"/></svg><h3>Decimal engine</h3><p>Формулы исполняются безопасным DSL без float-ошибок и скрытых округлений.</p></article>
+        <article class="pipeline-step"><span>05</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 16.2-3.5-3.5L4.1 14.1 9 19 20 8l-1.4-1.4L9 16.2Z"/></svg><h3>Контрфакт</h3><p>Транзакция считается уликой только если её исключение меняет вердикт.</p></article>
+      </div>
+
+      <div class="differentiator-grid">
+        <article class="trust-card">
+          <span class="section-kicker">ПОЧЕМУ ЭТО ВЫДЕЛЯЕТСЯ</span>
+          <h3>У жюри есть путь от PDF до каждой цифры</h3>
+          <ul>
+            <li><strong>Два независимых прохода</strong><span>Planner строит план, reviewer исправляет только материальные ошибки.</span></li>
+            <li><strong>Ранняя защита от hallucination</strong><span>Несуществующие PDF, txn_id и небезопасные формулы блокируются до submission.</span></li>
+            <li><strong>Честный QA</strong><span>Public score отделён от private readiness; пограничные решения подсвечиваются отдельно.</span></li>
+            <li><strong>Полный audit package</strong><span>Plan, provenance, counterfactual trace, manifest и SHA-256 сохраняются автоматически.</span></li>
+          </ul>
+        </article>
+
+        <article class="submit-card">
+          <span class="section-kicker">ЧТО ОТПРАВЛЯТЬ</span>
+          <h3>GitHub + JSON обязательны. Сайт — усилитель защиты.</h3>
+          <div class="submit-row required"><span>01</span><div><strong>Ссылка на GitHub</strong><small>Код агента, README, тесты и воспроизводимый запуск.</small></div><b>ОБЯЗАТЕЛЬНО</b></div>
+          <div class="submit-row required"><span>02</span><div><strong>submission.json</strong><small>Загрузить отдельным файлом ровно по шаблону.</small></div><b>ОБЯЗАТЕЛЬНО</b></div>
+          <div class="submit-row optional"><span>03</span><div><strong>Этот Command Center</strong><small>Показывать локально или дать demo URL только как доказательство инженерного качества.</small></div><b>ДОПОЛНИТЕЛЬНО</b></div>
+          <p>Не тратьте последнюю попытку на сайт: оцениваемый ответ — JSON. Интерфейс нужен, чтобы выиграть сравнение решений на защите.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="dashboard-section" id="workspace" aria-labelledby="workspace-title">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">AGENT WORKSPACE</span>
+          <h2 id="workspace-title">Новый запуск</h2>
+          <p>Выберите набор данных и режим анализа. Агент сам построит решение и проверит доказательства.</p>
+        </div>
+      </div>
+
+      <div class="workspace-grid">
+        <article class="panel config-panel">
+          <div class="panel-heading">
+            <div><span>КОНФИГУРАЦИЯ</span><h3>Параметры анализа</h3></div>
+            <span class="panel-badge">01</span>
+          </div>
+
+          <form id="run-form">
+            <fieldset class="mode-fieldset">
+              <legend>Режим анализа</legend>
+              <div class="segmented-control">
+                <label><input type="radio" name="mode" value="auto" checked><span>Auto</span></label>
+                <label><input type="radio" name="mode" value="public"><span>Public</span></label>
+                <label><input type="radio" name="mode" value="llm"><span>Private · LLM</span></label>
+              </div>
+              <p class="field-help" id="mode-help">Auto использует public fact pack только при точном SHA-256 совпадении; для новых данных включает LLM.</p>
+            </fieldset>
+
+            <div class="field full-field">
+              <label for="data-dir">Папка с датасетом</label>
+              <div class="input-shell">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h7l2 2h9v12H3V5Zm2 2v10h14V9h-8l-2-2H5Z"/></svg>
+                <input id="data-dir" name="data_dir" autocomplete="off" required>
+              </div>
+              <span class="field-help">Нужны submission_template.json, master_ledger_2025.csv и папка documents.</span>
+              <div class="dataset-presets" aria-label="Быстрый выбор датасета">
+                <button class="dataset-preset active" type="button" data-dataset-preset="public"><span>Public benchmark</span><small>12 сценариев · 36 ячеек</small></button>
+                <button class="dataset-preset" type="button" data-dataset-preset="private" id="private-dataset-preset"><span>Private dataset</span><small>Автоопределение папки</small></button>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="team">Название команды</label>
+                <input id="team" name="team" placeholder="Название команды" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="contact-email">Email</label>
+                <input id="contact-email" name="contact_email" type="email" placeholder="team@example.com" autocomplete="email">
+              </div>
+            </div>
+
+            <details class="advanced-settings">
+              <summary>Параметры LLM <span>только private-режим</span></summary>
+              <div class="form-grid advanced-grid">
+                <div class="field"><label for="model">Модель</label><input id="model" name="model" value="gpt-5.6" autocomplete="off"></div>
+                <div class="field"><label for="reasoning">Reasoning effort</label><select id="reasoning" name="reasoning_effort"><option value="medium">Medium</option><option value="high" selected>High</option><option value="xhigh">XHigh</option><option value="max">Max</option></select></div>
+                <label class="checkbox-field"><input id="review" type="checkbox" checked><span>Независимый второй проход проверки</span></label>
+              </div>
+            </details>
+
+            <div class="form-actions">
+              <button class="button primary" id="run-button" type="submit">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg><span>Запустить агента</span>
+              </button>
+              <button class="button secondary" id="preflight-button" type="button">Preflight</button>
+              <button class="button secondary" id="validate-button" type="button">Проверить JSON</button>
+            </div>
+          </form>
+        </article>
+
+        <aside class="panel run-panel" aria-labelledby="run-status-title">
+          <div class="panel-heading inverse">
+            <div><span>ТЕКУЩИЙ ЗАПУСК</span><h3 id="run-status-title">Ход выполнения</h3></div>
+            <span class="status-pill idle" id="run-status-pill">Готов</span>
+          </div>
+
+          <div class="agent-state">
+            <div class="ai-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <strong id="run-message">Агент готов к запуску</strong>
+            <p id="run-timing">Выберите режим и укажите данные.</p>
+            <div class="processing-line" aria-hidden="true"><span></span></div>
+          </div>
+
+          <ol class="run-steps" id="run-steps">
+            <li class="complete"><span>01</span><div><strong>Подготовка</strong><small>Интерфейс и локальный сервер готовы</small></div></li>
+            <li><span>02</span><div><strong>Документы</strong><small>Индексация и выбор актуальных версий</small></div></li>
+            <li><span>03</span><div><strong>Решения</strong><small>Расчёт и проверка доказательств</small></div></li>
+            <li><span>04</span><div><strong>Submission</strong><small>Валидация и сохранение JSON</small></div></li>
+          </ol>
+
+          <details class="log-details"><summary>Технический журнал</summary><pre id="run-logs">Журнал пока пуст.</pre></details>
+        </aside>
+      </div>
+
+      <article class="dataset-audit-card" id="dataset-audit" aria-labelledby="dataset-audit-title">
+        <div class="dataset-audit-head">
+          <div><span class="section-kicker">DATASET INTELLIGENCE</span><h3 id="dataset-audit-title">Профиль входных данных</h3></div>
+          <span class="panel-badge" id="dataset-route-badge">NO PREFLIGHT</span>
+        </div>
+        <div class="dataset-stat-grid">
+          <div><strong id="audit-scenarios">—</strong><span>сценариев</span></div>
+          <div><strong id="audit-cells">—</strong><span>ячеек</span></div>
+          <div><strong id="audit-txns">—</strong><span>операций</span></div>
+          <div><strong id="audit-docs">—</strong><span>PDF</span></div>
+          <div><strong id="audit-pages">—</strong><span>страниц</span></div>
+          <div><strong id="audit-ocr">—</strong><span>OCR-страниц</span></div>
+        </div>
+        <div class="dataset-risk-line" id="dataset-risk-line"><span>Запустите Preflight — агент покажет валюты, пропуски, конфликты версий и готовность OCR.</span></div>
+      </article>
+
+      <div class="calibration-note">
+        <span class="note-icon">!</span>
+        <div><strong>Public score — калибровка, а не оценка private-режима</strong><p>36/36 подтверждает формат и вычислительный движок на известном наборе. Перед сдачей нужен отдельный dry run LLM-пайплайна.</p></div>
+        <button class="text-button" id="validate-inline" type="button">Проверить файл</button>
+      </div>
+    </section>
+
+    <section class="dashboard-section" id="results" aria-labelledby="results-title">
+      <div class="section-heading horizontal">
+        <div>
+          <span class="section-kicker">DECISION MATRIX</span>
+          <h2 id="results-title">Результаты по ковенантам</h2>
+          <p>Все решения агента с рассчитанными значениями и транзакциями-уликами.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="button secondary compact" type="button" id="refresh-results">Обновить</button>
+          <a class="button secondary compact" href="/api/download/trace" download>Скачать trace</a>
+        </div>
+      </div>
+
+      <div class="result-summary" aria-label="Сводка решений">
+        <div><span>Все решения</span><strong id="summary-total">—</strong></div>
+        <div class="success"><span>Соблюдено</span><strong id="summary-compliant">—</strong></div>
+        <div class="danger"><span>Нарушено</span><strong id="summary-breach">—</strong></div>
+        <div><span>С транзакцией-уликой</span><strong id="summary-evidence">—</strong></div>
+      </div>
+
+      <div class="results-card">
+        <div class="table-toolbar">
+          <div class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3a7 7 0 1 1-4.9 12L2 18.1 3.9 20l3.1-3.1A7 7 0 0 1 10 3Zm0 2a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/></svg>
+            <label class="sr-only" for="result-search">Поиск по результатам</label>
+            <input id="result-search" placeholder="Сценарий, пункт или транзакция…">
+          </div>
+          <label class="filter-select"><span class="sr-only">Фильтр статуса</span><select id="status-filter"><option value="all">Все статусы</option><option value="BREACH">Только нарушения</option><option value="COMPLIANT">Только соблюдённые</option></select></label>
+        </div>
+        <div class="table-shell">
+          <table>
+            <thead><tr><th>Сценарий</th><th>Ковенант</th><th>Вердикт</th><th>Факт</th><th>Транзакция-улика</th><th><span class="sr-only">Подробнее</span></th></tr></thead>
+            <tbody id="results-body"><tr><td colspan="6" class="empty-cell">Загрузка результатов…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="table-caption" id="result-caption">Каждая строка открывает расчёт, источники и происхождение фактов.</p>
+    </section>
+
+    <section class="dashboard-section" id="documents" aria-labelledby="documents-title">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">БАЗА ЗНАНИЙ</span>
+          <h2 id="documents-title">Материалы проекта</h2>
+          <p>Техническое задание, анализ задачи, статус и финальный чек-лист.</p>
+        </div>
+      </div>
+      <div class="document-grid" id="document-grid"></div>
+    </section>
+
+    <footer class="app-footer">
+      <span>Halyk AI Challenge · локальная рабочая зона</span>
+      <span>API-ключ остаётся на сервере; private-режим передаёт модели только выбранный evidence-контекст</span>
+    </footer>
+  </main>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="detail-drawer" id="detail-drawer" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-header">
+      <div><span class="section-kicker" id="drawer-kicker">DECISION TRACE</span><h2 id="drawer-title">Детали решения</h2></div>
+      <button class="icon-button" id="drawer-close" type="button" aria-label="Закрыть детали"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5Z"/></svg></button>
+    </div>
+    <div class="drawer-content" id="drawer-content"></div>
+  </aside>
+
+  <div class="modal-backdrop" id="document-modal" hidden>
+    <section class="document-modal-card" role="dialog" aria-modal="true" aria-labelledby="document-title">
+      <div class="drawer-header">
+        <div><span class="section-kicker">PROJECT DOCUMENT</span><h2 id="document-title">Документ</h2></div>
+        <button class="icon-button" id="document-close" type="button" aria-label="Закрыть документ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5Z"/></svg></button>
+      </div>
+      <pre id="document-content"></pre>
+    </section>
+  </div>
+
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <script src="/app.js" defer></script>
+</body>
+</html>

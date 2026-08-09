@@ -1,0 +1,529 @@
+{
+  "version": "public-facts-v1",
+  "purpose": "Vetted facts and calculation plans extracted from the public documents. This file contains no copied ground-truth answers.",
+  "dataset_fingerprint": {
+    "master_ledger_2025.csv": "1b3267a3a2155af23190b785e64a9c8bab3eb3103d58b3dc258ddf7ccd88ac0e",
+    "submission_template.json": "4052c5a6e148a18fed6c5064889b2ec27f97b2b120109905f867058276e95d73"
+  },
+  "scenarios": {
+    "P1": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Maximum Capital Intensity Ratio",
+          "operator": "<=",
+          "threshold": "0.42",
+          "expression": "capex / (opex + rent)",
+          "facts": {
+            "capex": {"type": "txn", "ids": ["TXN-P1-0010"]},
+            "opex": {"type": "txn", "ids": ["TXN-P1-0042"]},
+            "rent": {"type": "txn", "ids": ["TXN-P1-0014"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["8d878af064f2.pdf", "896b7933db48.pdf"],
+          "rationale": "CapEx divided by borrower operating costs plus terminal land lease. Auditor excludes TXN-P1-0045 from 2025."
+        },
+        {
+          "clause": "6.2",
+          "title": "Minimum category revenue",
+          "operator": ">=",
+          "threshold": "7100000",
+          "expression": "revenue",
+          "facts": {"revenue": {"type": "txn", "ids": ["TXN-P1-0030"]}},
+          "evidence_candidates": [],
+          "source_documents": ["8d878af064f2.pdf", "896b7933db48.pdf"],
+          "rationale": "Audited 2025 port handling revenue."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "450000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-P1-0031"]}},
+          "evidence_candidates": [],
+          "source_documents": ["8d878af064f2.pdf", "2dd8671ac405.pdf"],
+          "rationale": "Aktau Holdings exceeds the KYC related-party ownership threshold."
+        }
+      ]
+    },
+    "P2": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Minimum Cover of Applications by Sources",
+          "operator": ">=",
+          "threshold": "1.20",
+          "expression": "(revenue + financing) / (opex + accepted_reclass + capex)",
+          "facts": {
+            "revenue": {"type": "txn", "ids": ["TXN-P2-0034"]},
+            "financing": {"type": "txn", "ids": ["TXN-P2-0028"]},
+            "opex": {"type": "txn", "ids": ["TXN-P2-0009"]},
+            "accepted_reclass": {"type": "txn", "ids": ["TXN-P2-0040"]},
+            "capex": {"type": "txn", "ids": ["TXN-P2-0036"]}
+          },
+          "evidence_candidates": ["TXN-P2-0040"],
+          "source_documents": ["b2519c8e3ea4.pdf", "3fd0d34546b5.pdf"],
+          "rationale": "Final audit reclassifies TXN-P2-0040 from consulting to operating expense."
+        },
+        {
+          "clause": "6.2",
+          "title": "Maximum capital expenditure",
+          "operator": "<=",
+          "threshold": "3000000",
+          "expression": "capex",
+          "facts": {"capex": {"type": "txn", "ids": ["TXN-P2-0036"]}},
+          "evidence_candidates": [],
+          "source_documents": ["b2519c8e3ea4.pdf", "3fd0d34546b5.pdf"],
+          "rationale": "Blast-freezer equipment is the audited CapEx item."
+        },
+        {
+          "clause": "6.3",
+          "title": "Related-party payments as a proportion of revenue",
+          "operator": "<=",
+          "threshold": "0.03",
+          "expression": "related_payments / revenue",
+          "facts": {
+            "related_payments": {"type": "txn", "ids": ["TXN-P2-0012"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P2-0034"]}
+          },
+          "evidence_candidates": ["TXN-P2-0012"],
+          "source_documents": ["b2519c8e3ea4.pdf", "63e162bd710b.pdf"],
+          "rationale": "Vision OCR shows Zhetysu Capital at 31.2% versus a 25% KYC threshold."
+        }
+      ]
+    },
+    "P3": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Springing Drawdown Leverage Test",
+          "operator": "<=",
+          "threshold": "1.70",
+          "expression": "financing / (revenue - opex_usd - opex_eur * fx_usd_per_eur)",
+          "facts": {
+            "financing": {"type": "txn", "ids": ["TXN-P3-0002"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P3-0010"]},
+            "opex_usd": {"type": "txn", "ids": ["TXN-P3-0028"]},
+            "opex_eur": {"type": "txn", "ids": ["TXN-P3-0024"]},
+            "fx_usd_per_eur": {"type": "literal", "value": "1.16", "source": "6f1c06f8479a.pdf", "note": "Auditor rate from USD 83,690.23 / EUR 72,146.75, disclosed as 1.16"}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["85afaaca89ad.pdf", "6f1c06f8479a.pdf"],
+          "rationale": "The test springs because financing exceeds USD 4m; the final audit says no reclassification was required."
+        },
+        {
+          "clause": "6.2",
+          "title": "Minimum category revenue",
+          "operator": ">=",
+          "threshold": "6500000",
+          "expression": "revenue",
+          "facts": {"revenue": {"type": "txn", "ids": ["TXN-P3-0010"]}},
+          "evidence_candidates": [],
+          "source_documents": ["85afaaca89ad.pdf", "6f1c06f8479a.pdf"],
+          "rationale": "Audited refinery turnaround services revenue."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "400000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-P3-0001"]}},
+          "evidence_candidates": [],
+          "source_documents": ["85afaaca89ad.pdf", "ee32532e1126.pdf"],
+          "rationale": "Turan Capital is related under the current KYC file."
+        }
+      ]
+    },
+    "P4": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Minimum adjusted EBITDA margin",
+          "operator": ">=",
+          "threshold": "0.28",
+          "expression": "(revenue - core_opex - non_addback_oneoff) / revenue",
+          "facts": {
+            "revenue": {"type": "txn", "ids": ["TXN-P4-0043"]},
+            "core_opex": {"type": "txn", "ids": ["TXN-P4-0054"]},
+            "non_addback_oneoff": {"type": "literal", "value": "251338.94", "source": "2ed0b2ee4b57.pdf", "note": "Scanned page 4; below USD 300,000 materiality threshold"}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["3a4aa2dbd6c4.pdf", "2ed0b2ee4b57.pdf"],
+          "rationale": "Only one-off items above USD 300,000 are added back; the below-threshold item remains an expense."
+        },
+        {
+          "clause": "6.2",
+          "title": "Maximum capital expenditure",
+          "operator": "<=",
+          "threshold": "1800000",
+          "expression": "capex",
+          "facts": {"capex": {"type": "txn", "ids": ["TXN-P4-0053"]}},
+          "evidence_candidates": [],
+          "source_documents": ["3a4aa2dbd6c4.pdf", "2ed0b2ee4b57.pdf"],
+          "rationale": "Audited grain conveyor equipment CapEx."
+        },
+        {
+          "clause": "6.3",
+          "title": "Related-party payments as a proportion of revenue",
+          "operator": "<=",
+          "threshold": "0.04",
+          "expression": "related_payments / revenue",
+          "facts": {
+            "related_payments": {"type": "txn", "ids": ["TXN-P4-0048"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P4-0043"]}
+          },
+          "evidence_candidates": [],
+          "compare_round": 2,
+          "source_documents": ["3a4aa2dbd6c4.pdf", "9f1a89a5ed42.pdf"],
+          "rationale": "Public case applies the two-decimal reported ratio at the 0.04 boundary; retain full raw value in trace."
+        }
+      ]
+    },
+    "P5": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Maximum Group CapEx to borrower EBITDA",
+          "operator": "<=",
+          "threshold": "9.00",
+          "expression": "group_capex / (revenue - borrower_opex)",
+          "facts": {
+            "group_capex": {"type": "literal", "value": "21848442.62", "source": "ea8d8bac3e62.pdf", "note": "Group-scope CapEx from the auditor covenant supplement (vision-readable page); scope differs from borrower ledger"},
+            "revenue": {"type": "txn", "ids": ["TXN-P5-0013"]},
+            "borrower_opex": {"type": "txn", "ids": ["TXN-P5-0031"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["1d262694c308.pdf", "ea8d8bac3e62.pdf"],
+          "rationale": "Numerator is consolidated Group CapEx while denominator is borrower-only EBITDA."
+        },
+        {
+          "clause": "6.2",
+          "title": "Minimum category revenue",
+          "operator": ">=",
+          "threshold": "7500000",
+          "expression": "revenue",
+          "facts": {"revenue": {"type": "txn", "ids": ["TXN-P5-0013"]}},
+          "evidence_candidates": [],
+          "source_documents": ["1d262694c308.pdf", "ea8d8bac3e62.pdf"],
+          "rationale": "Audited generation capacity revenue."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "260000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-P5-0004"]}},
+          "evidence_candidates": ["TXN-P5-0004"],
+          "source_documents": ["1d262694c308.pdf", "89af6ae7964f.pdf"],
+          "rationale": "Sarybel Capital is above the 35% KYC threshold."
+        }
+      ]
+    },
+    "P6": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Related-party payments to OpEx",
+          "operator": "<=",
+          "threshold": "0.08",
+          "expression": "related_payments / opex",
+          "facts": {
+            "related_payments": {"type": "txn", "ids": ["TXN-P6-0040"]},
+            "opex": {"type": "txn", "ids": ["TXN-P6-0041"]}
+          },
+          "evidence_candidates": ["TXN-P6-0040"],
+          "source_documents": ["be7c1bba8940.pdf", "f3fa6d20c8a1.pdf"],
+          "rationale": "Vision OCR shows Taraz Holding at 46.8% versus the 40% KYC threshold; Taraz Kiln at 38.1% is not related."
+        },
+        {
+          "clause": "6.2",
+          "title": "Revenue cover of payroll and utilities",
+          "operator": ">=",
+          "threshold": "3.00",
+          "expression": "revenue / (payroll + utilities)",
+          "facts": {
+            "revenue": {"type": "txn", "ids": ["TXN-P6-0031"]},
+            "payroll": {"type": "txn", "ids": ["TXN-P6-0004"]},
+            "utilities": {"type": "txn", "ids": ["TXN-P6-0044"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["be7c1bba8940.pdf", "3963dfb04b2a.pdf"],
+          "rationale": "Borrower revenue divided by audited payroll plus electricity."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum capital expenditure",
+          "operator": "<=",
+          "threshold": "1600000",
+          "expression": "capex",
+          "facts": {"capex": {"type": "txn", "ids": ["TXN-P6-0022"]}},
+          "evidence_candidates": [],
+          "source_documents": ["be7c1bba8940.pdf", "3963dfb04b2a.pdf"],
+          "rationale": "Clinker grinding equipment CapEx."
+        }
+      ]
+    },
+    "P7": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Taxes and utilities to EBITDA",
+          "operator": "<=",
+          "threshold": "0.30",
+          "expression": "(income_tax + mineral_tax + utilities) / (revenue - opex)",
+          "facts": {
+            "income_tax": {"type": "txn", "ids": ["TXN-P7-0010"]},
+            "mineral_tax": {"type": "txn", "ids": ["TXN-P7-0033"], "fallback": "486204.19"},
+            "utilities": {"type": "txn", "ids": ["TXN-P7-0047"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P7-0032"]},
+            "opex": {"type": "txn", "ids": ["TXN-P7-0031"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["6acb5bbc3e70.pdf", "596a5d8b04f5.pdf", "26acfab1e58b.pdf"],
+          "rationale": "Treasury memo supplies the missing TXN-P7-0033 amount."
+        },
+        {
+          "clause": "6.2",
+          "title": "Minimum category revenue",
+          "operator": ">=",
+          "threshold": "8700000",
+          "expression": "revenue",
+          "facts": {"revenue": {"type": "txn", "ids": ["TXN-P7-0032"]}},
+          "evidence_candidates": [],
+          "source_documents": ["6acb5bbc3e70.pdf", "596a5d8b04f5.pdf"],
+          "rationale": "Audited pipeline transit revenue."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "275000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-P7-0035"]}},
+          "evidence_candidates": ["TXN-P7-0035"],
+          "source_documents": ["6acb5bbc3e70.pdf", "2bdb134db53c.pdf"],
+          "rationale": "Atyrau Holding exceeds the current KYC threshold."
+        }
+      ]
+    },
+    "P8": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Maximum aggregate personnel obligations",
+          "operator": "<=",
+          "threshold": "4000000",
+          "expression": "base_payroll + q4_payroll + off_ledger_severance",
+          "facts": {
+            "base_payroll": {"type": "txn", "ids": ["TXN-P8-0005"]},
+            "q4_payroll": {"type": "txn", "ids": ["TXN-P8-0031"], "fallback": "884204.16"},
+            "off_ledger_severance": {"type": "literal", "value": "918447.52", "source": "bf9b7bffc514.pdf", "note": "Final audit note; obligation outside ledger"}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["61dfc54675dc.pdf", "bf9b7bffc514.pdf"],
+          "rationale": "Includes ordinary payroll, missing Q4 ledger amount and final audited off-ledger severance obligation."
+        },
+        {
+          "clause": "6.2",
+          "title": "Maximum capital expenditure",
+          "operator": "<=",
+          "threshold": "2100000",
+          "expression": "capex",
+          "facts": {"capex": {"type": "txn", "ids": ["TXN-P8-0030"]}},
+          "evidence_candidates": [],
+          "source_documents": ["61dfc54675dc.pdf", "bf9b7bffc514.pdf"],
+          "rationale": "Drilling rig equipment CapEx."
+        },
+        {
+          "clause": "6.3",
+          "title": "Related-party payments as a proportion of revenue",
+          "operator": "<=",
+          "threshold": "0.04",
+          "expression": "related_payments / revenue",
+          "facts": {
+            "related_payments": {"type": "txn", "ids": ["TXN-P8-0016"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P8-0015"]}
+          },
+          "evidence_candidates": ["TXN-P8-0016"],
+          "source_documents": ["61dfc54675dc.pdf", "22c1707dad45.pdf"],
+          "rationale": "Syrdarya Capital exceeds the current KYC threshold; draft reclassification is not authoritative."
+        }
+      ]
+    },
+    "P9": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Transfers to unrestricted subsidiaries over CapEx",
+          "operator": "<=",
+          "threshold": "0.15",
+          "expression": "unrestricted_transfer / (equipment_purchase + restricted_transfer + unrestricted_transfer)",
+          "facts": {
+            "unrestricted_transfer": {"type": "txn", "ids": ["TXN-P9-0025"]},
+            "restricted_transfer": {"type": "txn", "ids": ["TXN-P9-0017"]},
+            "equipment_purchase": {"type": "txn", "ids": ["TXN-P9-0035"]}
+          },
+          "evidence_candidates": ["TXN-P9-0025"],
+          "source_documents": ["c2c9382c9168.pdf", "aaf665cbc612.pdf"],
+          "rationale": "Vision OCR shows Processing Holdings at 11.4% encumbered and unrestricted; Conveyor Assets at 87.6% is restricted."
+        },
+        {
+          "clause": "6.2",
+          "title": "Minimum category revenue",
+          "operator": ">=",
+          "threshold": "6900000",
+          "expression": "revenue",
+          "facts": {"revenue": {"type": "txn", "ids": ["TXN-P9-0012"]}},
+          "evidence_candidates": [],
+          "source_documents": ["c2c9382c9168.pdf", "7903e7d18e94.pdf"],
+          "rationale": "Audited ore haulage revenue."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "225000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-P9-0040"]}},
+          "evidence_candidates": ["TXN-P9-0040"],
+          "source_documents": ["c2c9382c9168.pdf", "aaf665cbc612.pdf"],
+          "rationale": "Ulytau Capital exceeds the current KYC threshold."
+        }
+      ]
+    },
+    "P10": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Minimum insurance cover of occupancy costs",
+          "operator": ">=",
+          "threshold": "0.20",
+          "expression": "(insurance + accepted_insurance_reclass) / (rent + utilities)",
+          "facts": {
+            "insurance": {"type": "txn", "ids": ["TXN-P10-0011"]},
+            "accepted_insurance_reclass": {"type": "txn", "ids": ["TXN-P10-0017"]},
+            "rent": {"type": "txn", "ids": ["TXN-P10-0021"]},
+            "utilities": {"type": "txn", "ids": ["TXN-P10-0064"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["ba475cfc33a4.pdf", "4db1d630055f.pdf"],
+          "rationale": "Final audit accepts TXN-P10-0017 as insurance and rejects the proposed reclassification of TXN-P10-0012."
+        },
+        {
+          "clause": "6.2",
+          "title": "Revenue less largest overhead line",
+          "operator": ">=",
+          "threshold": "5000000",
+          "expression": "revenue - max(payroll, taxes)",
+          "facts": {
+            "revenue": {"type": "txn", "ids": ["TXN-P10-0055"]},
+            "payroll": {"type": "txn", "ids": ["TXN-P10-0020"]},
+            "taxes": {"type": "txn", "ids": ["TXN-P10-0063"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["ba475cfc33a4.pdf", "4db1d630055f.pdf"],
+          "rationale": "Subtract only the larger of payroll and taxes, not their sum."
+        },
+        {
+          "clause": "6.3",
+          "title": "Related-party payments as a proportion of revenue",
+          "operator": "<=",
+          "threshold": "0.05",
+          "expression": "related_payments / revenue",
+          "facts": {
+            "related_payments": {"type": "txn", "ids": ["TXN-P10-0002"]},
+            "revenue": {"type": "txn", "ids": ["TXN-P10-0055"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["ba475cfc33a4.pdf", "07e1a2a0275d.pdf"],
+          "rationale": "Saryarka Capital exceeds the current KYC ownership threshold."
+        }
+      ]
+    },
+    "B1": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Minimum interest cover",
+          "operator": ">=",
+          "threshold": "2.00",
+          "expression": "(revenue - opex) / (interest + accepted_interest_reclass)",
+          "facts": {
+            "revenue": {"type": "txn", "ids": ["TXN-B1-0026"]},
+            "opex": {"type": "txn", "ids": ["TXN-B1-0023"]},
+            "interest": {"type": "txn", "ids": ["TXN-B1-0033"]},
+            "accepted_interest_reclass": {"type": "txn", "ids": ["TXN-B1-0020"]}
+          },
+          "evidence_candidates": ["TXN-B1-0020"],
+          "source_documents": ["b38facf69a94.pdf", "448b59e12768.pdf"],
+          "rationale": "Final AUP reclassifies TXN-B1-0020 from consulting to interest; the conflicting draft is ignored."
+        },
+        {
+          "clause": "6.2",
+          "title": "Individual overhead line ceiling",
+          "operator": "<=",
+          "threshold": "1500000",
+          "expression": "max(payroll, utilities)",
+          "facts": {
+            "payroll": {"type": "txn", "ids": ["TXN-B1-0004"]},
+            "utilities": {"type": "txn", "ids": ["TXN-B1-0014"]}
+          },
+          "evidence_candidates": [],
+          "source_documents": ["b38facf69a94.pdf", "448b59e12768.pdf"],
+          "rationale": "Test the larger individual overhead line, not the sum."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "500000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-B1-0030"]}},
+          "evidence_candidates": [],
+          "source_documents": ["b38facf69a94.pdf", "c66b5b638410.pdf"],
+          "rationale": "Ertis Capital exceeds the current KYC threshold."
+        }
+      ]
+    },
+    "B4": {
+      "covenants": [
+        {
+          "clause": "6.1",
+          "title": "Minimum fourth-quarter revenue",
+          "operator": ">=",
+          "threshold": "3500000",
+          "expression": "q4_revenue",
+          "facts": {"q4_revenue": {"type": "txn", "ids": ["TXN-B4-0014"]}},
+          "evidence_candidates": [],
+          "source_documents": ["bc5451f75caf.pdf", "e334c4d4d3ea.pdf"],
+          "rationale": "Final audit excludes the advance TXN-B4-0026 because risks and title transfer in January 2026."
+        },
+        {
+          "clause": "6.2",
+          "title": "Maximum capital expenditure",
+          "operator": "<=",
+          "threshold": "2000000",
+          "expression": "capex",
+          "facts": {"capex": {"type": "txn", "ids": ["TXN-B4-0021"]}},
+          "evidence_candidates": [],
+          "source_documents": ["bc5451f75caf.pdf", "e334c4d4d3ea.pdf"],
+          "rationale": "Pipeline pumping equipment is the audited CapEx item."
+        },
+        {
+          "clause": "6.3",
+          "title": "Maximum related-party payments",
+          "operator": "<=",
+          "threshold": "500000",
+          "expression": "related_payments",
+          "facts": {"related_payments": {"type": "txn", "ids": ["TXN-B4-0009"]}},
+          "evidence_candidates": [],
+          "source_documents": ["bc5451f75caf.pdf", "a144690a213c.pdf"],
+          "rationale": "Kazyna Capital is related; the indirect effective stake in Shymkent Fuel remains below the 30% threshold."
+        }
+      ]
+    }
+  }
+}

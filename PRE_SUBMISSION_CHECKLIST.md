@@ -1,0 +1,23 @@
+# Чек-лист перед отправкой
+
+- [ ] В `team` указано точное название команды.
+- [ ] В `contact_email` указан подтверждённый email.
+- [ ] Использован приватный каталог, а не публичный.
+- [ ] `preflight_report.json`: `hard_gates_passed = true` и маршрут `llm`.
+- [ ] `run_report.json`: `status = ok`.
+- [ ] `run_report.json`: `metadata_placeholders` пуст.
+- [ ] `quality_report.json`: `hard_gates_passed = true`; SHA-256 совпадает с финальным файлом.
+- [ ] В `plan_review.json` нет необъяснённых `review_failed_fallback`.
+- [ ] Выполнена команда `validate`, получено `VALID`.
+- [ ] В `submission.json` ровно все scenario/covenant keys шаблона.
+- [ ] Все `status` имеют только `COMPLIANT` или `BREACH`.
+- [ ] Все `actual` являются числами, а не строками.
+- [ ] Все ненулевые evidence ID существуют в приватном ledger.
+- [ ] Просмотрены предупреждения и исключения в терминале.
+- [ ] Проверены decision traces для пограничных значений и сканированных документов.
+- [ ] В `semantic_plans.json` каждый literal имеет реальный PDF-source, а `status_override` документирован.
+- [ ] Приватные ответы не редактировались вручную.
+- [ ] GitHub-репозиторий содержит код, README и зависимости, но не API key, `agentic-bank-hidden/`, OCR-кэши или private-артефакты.
+- [ ] В форму вставлена GitHub-ссылка, а `submission.json` загружен отдельно; сайт не используется вместо JSON.
+- [ ] Если есть demo URL, он проверен в отдельном браузере и указан только как дополнительный материал защиты.
+- [ ] Лучшая валидная попытка отправлена заранее, если правила разрешают несколько попыток.

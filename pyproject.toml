@@ -1,0 +1,10 @@
+[project]
+name = "halyk-covenant-agent"
+version = "1.0.0"
+description = "Hybrid evidence-first agent for Halyk AI Challenge"
+requires-python = ">=3.11"
+dependencies = ["pypdf>=6.0,<7"]
+
+[tool.unittest]
+test-directory = "tests"
+
