@@ -1,0 +1,7 @@
+
+# Portfolio media are retained as binary project evidence.
+*.png binary
+*.jpg binary
+*.webp binary
+*.mp4 binary
+*.pdf binary

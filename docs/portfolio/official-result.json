@@ -1,0 +1,13 @@
+{
+  "source_url": "https://halykbank.kz/storage/app/media/2026/8/leaderboard_final.xlsx",
+  "retrieved_on": "2026-10-12",
+  "source_sha256": "1be3675c221fd56ccd73eae3b117570365527e5ee3fd6056d15281711b67c82a",
+  "ranked_teams": 160,
+  "row": {
+    "rank": 26,
+    "team_name": "QwertyS",
+    "score_pct": 81.6688,
+    "declared_model": "codex-local-evidence-review",
+    "model_tier": "baseline"
+  }
+}

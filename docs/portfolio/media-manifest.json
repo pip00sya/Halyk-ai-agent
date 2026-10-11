@@ -1,0 +1,17 @@
+[
+  {
+    "file": "halyk-architecture.png",
+    "bytes": 94745,
+    "sha256": "65292ee3fdcf23f44aebb2fecf0b51632cb3e33ebf0a0ee488e45a08cbf31fc4"
+  },
+  {
+    "file": "halyk-configuration.png",
+    "bytes": 74394,
+    "sha256": "60978c2db0908d2dde13f40494ae6bd33dff2ed8468eacbfda5bf4e6a0d916d9"
+  },
+  {
+    "file": "halyk-overview.png",
+    "bytes": 64954,
+    "sha256": "d2ffb216714e46e9573b2100db1f08a3cdda276f483f1885428072cf77fc2327"
+  }
+]
