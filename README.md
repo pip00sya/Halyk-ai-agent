@@ -264,3 +264,13 @@ Codex и другие готовые агенты допустимы для ра
 создавать собственный агент. Поэтому в боевом прогоне нельзя вручную переписывать verdict,
 actual или evidence после запуска. Допустим технический контроль процесса, повторный запуск
 после исправления кода и проверка валидатора.
+
+## Совместная разработка и копия проекта
+
+**QwertyS** — совместный проект [Шахназара Ахмера / Eye172](https://github.com/Eye172)
+и [Нурхана Аймукатова / pip00sya](https://github.com/pip00sya), с равными ролями
+Full-stack Engineer, Software Engineer и AI Engineer. Шахназар также работает как ML Engineer.
+
+Исходная история и код сохраняются в [pip00sya/Halyk-ai-agent](https://github.com/pip00sya/Halyk-ai-agent).
+Полная копия проекта, история и материалы переноса:
+[Eye172/halyk-hackathon-1](https://github.com/Eye172/halyk-hackathon-1).
