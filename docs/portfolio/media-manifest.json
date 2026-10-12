@@ -13,5 +13,20 @@
     "file": "halyk-overview.png",
     "bytes": 64954,
     "sha256": "d2ffb216714e46e9573b2100db1f08a3cdda276f483f1885428072cf77fc2327"
+  },
+  {
+    "file": "media/demo-preview.jpg",
+    "bytes": 60855,
+    "sha256": "1b6c4b0682277d7d827aa0a73c33a79f3a4d039e5fe97c0ff396de14b09c4962"
+  },
+  {
+    "file": "media/documents-view.jpg",
+    "bytes": 47489,
+    "sha256": "6f6f2698567603fa38d6110d342d652f55c44ecd8d1cdda16c22a8d06c20a5f7"
+  },
+  {
+    "file": "media/halyk-interface-tour.mp4",
+    "bytes": 1939891,
+    "sha256": "6b0e1adf866e7f6ef02247be0da619c6299acf49d7944a4a981105b663ba1de9"
   }
 ]
